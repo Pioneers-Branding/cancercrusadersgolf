@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCGC Registration Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+    
+    
+    
+    .form-check-input{
+            border: var(--bs-border-width) solid #0a0a0a !important;
+    }
+    
+    
+    
+
+    
+    
+        body {
+            background: linear-gradient(135deg, #e8f5e9 0%, #e3f2fd 100%);
+            min-height: 100vh;
+            padding: 30px 0;
+        }
+        .progress-bar-custom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .progress-step {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background-color: #dee2e6;
+            color: #6c757d;
+            position: relative;
+        }
+        .progress-step.active {
+            background-color: #0d6efd;
+            color: white;
+        }
+        .progress-step.completed {
+            background-color: #28a745;
+            color: white;
+        }
+        .progress-line {
+            flex: 1;
+            height: 3px;
+            background-color: #dee2e6;
+            margin: 0 10px;
+        }
+        .progress-line.completed {
+            background-color: #28a745;
+        }
+        .step-label {
+            font-size: 11px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        .form-section {
+            display: none;
+        }
+        .form-section.active {
+            display: block;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+        .btn-custom {
+            padding: 12px 30px;
+            font-weight: 600;
+        }
+        .payment-info {
+            background-color: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .qr-placeholder {
+            width: 150px;
+            height: 150px;
+            /*background-color: #f8f9fa;*/
+            /*border: 2px dashed #dee2e6;*/
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /*border-radius: 8px;*/
+            /*color: #6c757d;*/
+        }
+        .review-section {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+<!--        <div class="row justify-content-center">-->
+<!--            <div class="col-lg-10">-->
+                <!-- Header -->
+<!--                <div class="card mb-4">-->
+<!--                    <div class="card-body text-center py-4">-->
+<!--                        <h1 class="mb-2">CCGC Registration Form</h1>-->
+<!--                        <p class="text-muted mb-0">CURE Foundation Charity Event</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <!-- Progress Bar -->
+<!--                <div class="card mb-4">-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="progress-bar-custom">-->
+<!--                            <div class="text-center">-->
+<!--                                <div class="progress-step active" id="step-indicator-1">1</div>-->
+<!--                                <div class="step-label">Personal Info</div>-->
+<!--                            </div>-->
+<!--                            <div class="progress-line" id="line-1"></div>-->
+<!--                            <div class="text-center">-->
+<!--                                <div class="progress-step" id="step-indicator-2">2</div>-->
+<!--                                <div class="step-label">Golf Details</div>-->
+<!--                            </div>-->
+<!--                            <div class="progress-line" id="line-2"></div>-->
+<!--                            <div class="text-center">-->
+<!--                                <div class="progress-step" id="step-indicator-3">3</div>-->
+<!--                                <div class="step-label">Sizes</div>-->
+<!--                            </div>-->
+<!--                            <div class="progress-line" id="line-3"></div>-->
+<!--                            <div class="text-center">-->
+<!--                                <div class="progress-step" id="step-indicator-4">4</div>-->
+<!--                                <div class="step-label">Payment</div>-->
+<!--                            </div>-->
+<!--                            <div class="progress-line" id="line-4"></div>-->
+<!--                            <div class="text-center">-->
+<!--                                <div class="progress-step" id="step-indicator-5">5</div>-->
+<!--                                <div class="step-label">Review</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <!-- Form -->
+<!--                <div class="card">-->
+<!--                    <div class="card-body p-4">-->
+                        <!-- REPLACE 'YOUR_FORMESTER_ENDPOINT' WITH YOUR ACTUAL FORMESTER FORM URL -->
+<!--                      <form accept-charset='UTF-8' action='https://app.formester.com/forms/0st3AhRLq/submissions' method='POST'>-->
+                        <!--<form id="registrationForm" action="YOUR_FORMESTER_ENDPOINT" method="POST">-->
+                            
+                            <!-- Step 1: Personal Information -->
+<!--                            <div class="form-section active" id="step-1">-->
+<!--                                <h2 class="mb-4">Personal Information</h2>-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-md-6 mb-3">-->
+<!--                                        <label for="firstName" class="form-label">First Name *</label>-->
+<!--                                        <input type="text" class="form-control" id="firstName" name="firstName" required>-->
+<!--                                        <div class="error-message" id="error-firstName">First name is required</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-6 mb-3">-->
+<!--                                        <label for="lastName" class="form-label">Last Name *</label>-->
+<!--                                        <input type="text" class="form-control" id="lastName" name="lastName" required>-->
+<!--                                        <div class="error-message" id="error-lastName">Last name is required</div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="email" class="form-label">Email *</label>-->
+<!--                                    <input type="email" class="form-control" id="email" name="email" required>-->
+<!--                                    <div class="error-message" id="error-email">Please enter a valid email</div>-->
+<!--                                </div>-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="mobile" class="form-label">Mobile *</label>-->
+<!--                                    <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="10 digit mobile number" maxlength="10" required>-->
+<!--                                    <div class="error-message" id="error-mobile">Mobile must be 10 digits</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+                            <!-- Step 2: Golf Details -->
+<!--                            <div class="form-section" id="step-2">-->
+<!--                                <h2 class="mb-4">Golf Details</h2>-->
+<!--                                <div class="mb-4">-->
+<!--                                    <label class="form-label">Which Session do you want to Play? *</label>-->
+<!--                                    <input type="hidden" id="sessionValue" name="session" required>-->
+<!--                                    <div class="form-check mb-3">-->
+<!--                                        <input class="form-check-input" type="radio" name="sessionRadio" id="session1" value="Session 1: Friday, 30th January 2026 (Afternoon) - Reporting: 12 noon | Tee off: 12:30 pm" required>-->
+<!--                                        <label class="form-check-label" for="session1">-->
+<!--                                            <strong>Session 1: Friday, 30th January 2026 (Afternoon)</strong><br>-->
+<!--                                            <small class="text-muted">Reporting: 12 noon | Tee off: 12:30 pm</small>-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+                                    <!--<div class="form-check mb-3">-->
+                                    <!--    <input class="form-check-input" type="radio" name="sessionRadio" id="session2" value="Session 2: Saturday, 31st January 2026 (Morning) - Reporting: 6:15 am | Tee off: 6:45 am">-->
+                                    <!--    <label class="form-check-label" for="session2">-->
+                                    <!--        <strong>Session 2: Saturday, 31st January 2026 (Morning)</strong><br>-->
+                                    <!--        <small class="text-muted">Reporting: 6:15 am | Tee off: 6:45 am</small>-->
+                                    <!--    </label>-->
+                                    <!--</div>-->
+<!--                                    <div class="form-check mb-3">-->
+<!--                                        <input class="form-check-input" type="radio" name="sessionRadio" id="session3" value="Session 3: Saturday, 31st January 2026 (Afternoon) - Reporting: 12 noon | Tee off: 12:30 pm">-->
+<!--                                        <label class="form-check-label" for="session3">-->
+<!--                                            <strong>Session 3: Saturday, 31st January 2026 (Afternoon)</strong><br>-->
+<!--                                            <small class="text-muted">Reporting: 12 noon | Tee off: 12:30 pm</small>-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-check mb-3">-->
+<!--                                        <input class="form-check-input" type="radio" name="sessionRadio" id="session4" value="Session 4: Sunday, 1st February 2026 (Morning) - Reporting: 6:15 am | Tee off: 6:45 am">-->
+<!--                                        <label class="form-check-label" for="session4">-->
+<!--                                            <strong>Session 4: Sunday, 1st February 2026 (Morning)</strong><br>-->
+<!--                                            <small class="text-muted">Reporting: 6:15 am | Tee off: 6:45 am</small>-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-check mb-3">-->
+<!--                                        <input class="form-check-input" type="radio" name="sessionRadio" id="nopreference" value="I don't have a preference">-->
+<!--                                        <label class="form-check-label" for="nopreference">-->
+<!--                                            <strong>I don't have a preference</strong>-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                    <div class="error-message" id="error-session">Please select a session</div>-->
+<!--                                </div>-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="homeClub" class="form-label">What is your Home Club? *</label>-->
+<!--                                    <input type="text" class="form-control" id="homeClub" name="homeClub" placeholder="e.g., HGA, Boulder Hills, Bolarum" required>-->
+<!--                                    <div class="error-message" id="error-homeClub">Home club is required</div>-->
+<!--                                </div>-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="handicap" class="form-label">What is your handicap? *</label>-->
+<!--                                    <input type="text" class="form-control" id="handicap" name="handicap" required>-->
+<!--                                    <div class="error-message" id="error-handicap">Handicap is required</div>-->
+<!--                                </div>-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label class="form-label">Have you previously participated in CCGC? *</label>-->
+<!--                                    <div class="form-check">-->
+<!--                                        <input class="form-check-input" type="radio" name="previousParticipation" id="prevYes" value="Yes" required>-->
+<!--                                        <label class="form-check-label" for="prevYes">Yes</label>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-check">-->
+<!--                                        <input class="form-check-input" type="radio" name="previousParticipation" id="prevNo" value="No">-->
+<!--                                        <label class="form-check-label" for="prevNo">No</label>-->
+<!--                                    </div>-->
+<!--                                    <div class="error-message" id="error-previousParticipation">Please select an option</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+                            <!-- Step 3: Additional Details -->
+<!--                            <div class="form-section" id="step-3">-->
+<!--                                <h2 class="mb-4">Additional Details</h2>-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="shoeSize" class="form-label">Shoe Size (UK) *</label>-->
+<!--                                    <input type="text" class="form-control" id="shoeSize" name="shoeSize" placeholder="e.g., UK-7,UK-8,UK-9,UK-10, UK-11...." required>-->
+<!--                                    <div class="error-message" id="error-shoeSize">Shoe size is required</div>-->
+<!--                                </div>-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="tshirtSize" class="form-label">T-Shirt Size *</label>-->
+<!--                                    <select class="form-select" id="tshirtSize" name="tshirtSize" required>-->
+<!--                                        <option value="">Select size</option>-->
+<!--                                        <option value="XS">XS</option>-->
+<!--                                        <option value="S">S</option>-->
+<!--                                        <option value="M">M</option>-->
+<!--                                        <option value="L">L</option>-->
+<!--                                        <option value="XL">XL</option>-->
+<!--                                        <option value="XXL">XXL</option>-->
+<!--                                        <option value="XXXL">XXXL</option>-->
+<!--                                    </select>-->
+<!--                                    <div class="error-message" id="error-tshirtSize">T-shirt size is required</div>-->
+<!--                                </div>-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="comments" class="form-label">Comments (Optional)</label>-->
+<!--                                    <textarea class="form-control" id="comments" name="comments" rows="4" placeholder="Any additional information or special requests..."></textarea>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+                            <!-- Step 4: Payment -->
+<!--<div class="form-section" id="step-4">-->
+<!--  <h2 class="mb-4">Payment Details</h2>-->
+
+<!--  <div class="payment-info mb-4">-->
+<!--    <h4 class="mb-3 text-danger" style="font-size:2.5rem">Registration Fee: INR 6,000/-</h4>-->
+<!--    <p class="mb-2"><strong>Bank Details:</strong></p>-->
+<!--    <p class="mb-1"><strong>Beneficiary Name:</strong> CURE FOUNDATION</p>-->
+<!--    <p class="mb-1"><strong>Account Number:</strong> 107511011000374</p>-->
+<!--    <p class="mb-1"><strong>Account Type:</strong> CURRENT ACCOUNT</p>-->
+<!--    <p class="mb-1"><strong>Bank Name:</strong> UNION BANK OF INDIA</p>-->
+<!--    <p class="mb-1"><strong>Branch:</strong> APOLLO HOSPITAL BRANCH</p>-->
+<!--    <p class="mb-1"><strong>IFSC Code:</strong> UBIN0810754</p>-->
+<!--    <p class="mb-3">-->
+<!--      <small>Bank Address: Beside Apollo Hospitals, Film Nagar, Hyderabad, T.S. 500 096, INDIA</small>-->
+<!--    </p>-->
+
+<!--    <div class="mt-3 text-center">-->
+<!--      <p class="mb-2"><small>Scan QR Code to Pay via UPI</small></p>-->
+
+      <!-- Clickable QR Thumbnail -->
+<!--      <div class="qr-placeholder d-inline-block p-2 border rounded bg-light" -->
+<!--           data-bs-toggle="modal" data-bs-target="#qrModal" style="cursor: pointer;">-->
+<!--        <img src="img/payment-QR/UBI - QR Code-small.jpg" -->
+<!--             alt="UPI QR Code" -->
+<!--             class="img-fluid" -->
+<!--             style="max-width: 200px; height: auto; object-fit: contain;">-->
+<!--             Click to Zoom-->
+<!--      </div>-->
+
+      <!-- Modal -->
+<!--      <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog modal-dialog-centered">-->
+<!--          <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--              <h5 class="modal-title" id="qrModalLabel">Scan to Pay (UPI QR Code)</h5>-->
+<!--              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body text-center">-->
+<!--              <img src="img/payment-QR/UBI - QR Code-small.jpg" -->
+<!--                   alt="UPI QR Code" -->
+<!--                   class="img-fluid rounded" -->
+<!--                   style="max-width: 100%; height: auto;">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <!-- Payment Date -->
+<!--<div class="mb-3">-->
+<!--  <label for="paymentDate" class="form-label">Payment Date *</label>-->
+<!--  <input type="date" class="form-control" id="paymentDate" name="paymentDate" required>-->
+<!--  <div class="error-message" id="error-paymentDate">Payment date is required</div>-->
+
+  <!-- Display formatted date -->
+<!--  <small id="formattedDate" class="text-muted mt-1 d-block"></small>-->
+<!--</div>-->
+
+  <!-- Payment Reference -->
+<!--  <div class="mb-3">-->
+<!--    <label for="paymentReference " class="form-label text-danger">Payment Reference Number *</label>-->
+<!--    <input type="text" class="form-control" id="paymentReference" name="paymentReference" placeholder="UPI Transaction ID / Cheque Number" required>-->
+<!--    <small class="form-text text-muted">Cheque/DD should be issued in the name of "CURE FOUNDATION" payable at Hyderabad</small>-->
+<!--    <div class="error-message" id="error-paymentReference">Payment reference is required</div>-->
+<!--  </div>-->
+<!--</div>-->
+
+                            <!-- Step 5: Review -->
+<!--                            <div class="form-section" id="step-5">-->
+<!--                                <h2 class="mb-4">Review Your Information</h2>-->
+                                
+<!--                                <div class="review-section">-->
+<!--                                    <h5 class="mb-3">Personal Information</h5>-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-md-6 mb-2"><strong>First Name:</strong> <span id="review-firstName"></span></div>-->
+<!--                                        <div class="col-md-6 mb-2"><strong>Last Name:</strong> <span id="review-lastName"></span></div>-->
+<!--                                        <div class="col-md-6 mb-2"><strong>Email:</strong> <span id="review-email"></span></div>-->
+<!--                                        <div class="col-md-6 mb-2"><strong>Mobile:</strong> <span id="review-mobile"></span></div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                <div class="review-section">-->
+<!--                                    <h5 class="mb-3">Golf Details</h5>-->
+<!--                                    <p class="mb-2"><strong>Session:</strong> <span id="review-session"></span></p>-->
+<!--                                    <p class="mb-2"><strong>Home Club:</strong> <span id="review-homeClub"></span></p>-->
+<!--                                    <p class="mb-2"><strong>Handicap:</strong> <span id="review-handicap"></span></p>-->
+<!--                                    <p class="mb-2"><strong>Previous Participation:</strong> <span id="review-previousParticipation"></span></p>-->
+<!--                                </div>-->
+
+<!--                                <div class="review-section">-->
+<!--                                    <h5 class="mb-3">Additional Details</h5>-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-md-6 mb-2"><strong>Shoe Size:</strong> <span id="review-shoeSize"></span></div>-->
+<!--                                        <div class="col-md-6 mb-2"><strong>T-Shirt Size:</strong> <span id="review-tshirtSize"></span></div>-->
+<!--                                        <div class="col-12 mb-2" id="review-comments-section" style="display: none;">-->
+<!--                                            <strong>Comments:</strong> <span id="review-comments"></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                <div class="review-section">-->
+<!--                                    <h5 class="mb-3">Payment Details</h5>-->
+<!--                                    <p class="mb-2"><strong>Payment Date:</strong> <span id="review-paymentDate"></span></p>-->
+<!--                                    <p class="mb-2"><strong>Payment Reference:</strong> <span id="review-paymentReference"></span></p>-->
+<!--                                </div>-->
+
+<!--                                <div class="alert alert-warning">-->
+<!--                                    <strong>Note:</strong> All registered members are invited to attend the PRIZE DISTRIBUTION & -->
+<!--                                    World Cancer Day Celebrations on Sunday, 1st February 2026 at 7 PM at HICC Novotel, Hyderabad.-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+                            <!-- Navigation Buttons -->
+<!--                            <div class="d-flex justify-content-between mt-4">-->
+<!--                                <button type="button" class="btn btn-secondary btn-custom" id="prevBtn" onclick="changeStep(-1)" style="display: none;">-->
+<!--                                    <i class="bi bi-chevron-left"></i> Previous-->
+<!--                                </button>-->
+<!--                                <button type="button" class="btn btn-primary btn-custom ms-auto" id="nextBtn" onclick="changeStep(1)">-->
+<!--                                    Next <i class="bi bi-chevron-right"></i>-->
+<!--                                </button>-->
+<!--                                <button type="submit" class="btn btn-success btn-custom ms-auto" id="submitBtn" style="display: none;">-->
+<!--                                    <i class="bi bi-check-circle"></i> Submit Registration-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <!-- Contact Information -->
+<!--                <div class="card mt-4">-->
+<!--                    <div class="card-body">-->
+<!--                        <h5 class="mb-3">Contact Address</h5>-->
+<!--                        <p class="mb-0">-->
+<!--                            Dr. P. Vijay Anand Reddy<br>-->
+<!--                            Founder , Cure Foundation <br>-->
+<!--                            Director, Apollo Cancer Hospital<br>-->
+<!--                            Film Nagar, Hyderabad<br>-->
+<!--                            Telangana 500 096-->
+<!--                        </p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+       <div class="row">
+           <div class='col-12 text-center'>
+               <h1>Registration form is closed</h1>
+           </div>
+       </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+
+        // Update hidden session field when radio changes
+        document.querySelectorAll('input[name="sessionRadio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.getElementById('sessionValue').value = this.value;
+            });
+        });
+
+        function showStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show current step
+            document.getElementById('step-' + step).classList.add('active');
+            
+            // Update progress indicators
+            for (let i = 1; i <= totalSteps; i++) {
+                const stepIndicator = document.getElementById('step-indicator-' + i);
+                if (i < step) {
+                    stepIndicator.classList.remove('active');
+                    stepIndicator.classList.add('completed');
+                    stepIndicator.innerHTML = '<i class="bi bi-check"></i>';
+                } else if (i === step) {
+                    stepIndicator.classList.remove('completed');
+                    stepIndicator.classList.add('active');
+                    stepIndicator.textContent = i;
+                } else {
+                    stepIndicator.classList.remove('active', 'completed');
+                    stepIndicator.textContent = i;
+                }
+                
+                // Update progress lines
+                if (i < totalSteps) {
+                    const line = document.getElementById('line-' + i);
+                    if (i < step) {
+                        line.classList.add('completed');
+                    } else {
+                        line.classList.remove('completed');
+                    }
+                }
+            }
+            
+            // Update buttons
+            document.getElementById('prevBtn').style.display = step === 1 ? 'none' : 'inline-block';
+            document.getElementById('nextBtn').style.display = step === totalSteps ? 'none' : 'inline-block';
+            document.getElementById('submitBtn').style.display = step === totalSteps ? 'inline-block' : 'none';
+            
+            // If on review step, populate review data
+            if (step === 5) {
+                populateReview();
+            }
+        }
+
+        function validateStep(step) {
+            let isValid = true;
+            
+            // Clear all previous errors
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.style.display = 'none';
+            });
+            document.querySelectorAll('.is-invalid').forEach(input => {
+                input.classList.remove('is-invalid');
+            });
+
+            if (step === 1) {
+                const firstName = document.getElementById('firstName');
+                const lastName = document.getElementById('lastName');
+                const email = document.getElementById('email');
+                const mobile = document.getElementById('mobile');
+
+                if (!firstName.value.trim()) {
+                    showError('firstName');
+                    isValid = false;
+                }
+                if (!lastName.value.trim()) {
+                    showError('lastName');
+                    isValid = false;
+                }
+                if (!email.value.trim() || !email.value.match(/\S+@\S+\.\S+/)) {
+                    showError('email');
+                    isValid = false;
+                }
+                if (!mobile.value.trim() || mobile.value.length !== 10 || !/^\d{10}$/.test(mobile.value)) {
+                    showError('mobile');
+                    isValid = false;
+                }
+            }
+
+            if (step === 2) {
+                const session = document.querySelector('input[name="sessionRadio"]:checked');
+                const homeClub = document.getElementById('homeClub');
+                const handicap = document.getElementById('handicap');
+                const previousParticipation = document.querySelector('input[name="previousParticipation"]:checked');
+
+                if (!session) {
+                    showError('session');
+                    isValid = false;
+                }
+                if (!homeClub.value.trim()) {
+                    showError('homeClub');
+                    isValid = false;
+                }
+                if (!handicap.value.trim()) {
+                    showError('handicap');
+                    isValid = false;
+                }
+                if (!previousParticipation) {
+                    showError('previousParticipation');
+                    isValid = false;
+                }
+            }
+
+            if (step === 3) {
+                const shoeSize = document.getElementById('shoeSize');
+                const tshirtSize = document.getElementById('tshirtSize');
+
+                if (!shoeSize.value.trim()) {
+                    showError('shoeSize');
+                    isValid = false;
+                }
+                if (!tshirtSize.value) {
+                    showError('tshirtSize');
+                    isValid = false;
+                }
+            }
+
+            if (step === 4) {
+                const paymentDate = document.getElementById('paymentDate');
+                const paymentReference = document.getElementById('paymentReference');
+
+                if (!paymentDate.value) {
+                    showError('paymentDate');
+                    isValid = false;
+                }
+                if (!paymentReference.value.trim()) {
+                    showError('paymentReference');
+                    isValid = false;
+                }
+            }
+
+            return isValid;
+        }
+
+        function showError(fieldId) {
+            const errorElement = document.getElementById('error-' + fieldId);
+            const inputElement = document.getElementById(fieldId);
+            
+            if (errorElement) {
+                errorElement.style.display = 'block';
+            }
+            if (inputElement) {
+                inputElement.classList.add('is-invalid');
+            }
+        }
+
+        function changeStep(direction) {
+            if (direction === 1) {
+                if (!validateStep(currentStep)) {
+                    return;
+                }
+            }
+            
+            const newStep = currentStep + direction;
+            if (newStep >= 1 && newStep <= totalSteps) {
+                currentStep = newStep;
+                showStep(currentStep);
+            }
+        }
+
+        function populateReview() {
+            document.getElementById('review-firstName').textContent = document.getElementById('firstName').value;
+            document.getElementById('review-lastName').textContent = document.getElementById('lastName').value;
+            document.getElementById('review-email').textContent = document.getElementById('email').value;
+            document.getElementById('review-mobile').textContent = document.getElementById('mobile').value;
+
+            const selectedSession = document.querySelector('input[name="sessionRadio"]:checked');
+            document.getElementById('review-session').textContent = selectedSession ? selectedSession.value : '';
+            
+            document.getElementById('review-homeClub').textContent = document.getElementById('homeClub').value;
+            document.getElementById('review-handicap').textContent = document.getElementById('handicap').value;
+            
+            const previousParticipation = document.querySelector('input[name="previousParticipation"]:checked');
+            document.getElementById('review-previousParticipation').textContent = previousParticipation ? previousParticipation.value : '';
+
+            document.getElementById('review-shoeSize').textContent = document.getElementById('shoeSize').value;
+            document.getElementById('review-tshirtSize').textContent = document.getElementById('tshirtSize').value;
+            
+            const comments = document.getElementById('comments').value;
+            if (comments) {
+                document.getElementById('review-comments-section').style.display = 'block';
+                document.getElementById('review-comments').textContent = comments;
+            } else {
+                document.getElementById('review-comments-section').style.display = 'none';
+            }
+
+            document.getElementById('review-paymentDate').textContent = document.getElementById('paymentDate').value;
+            document.getElementById('review-paymentReference').textContent = document.getElementById('paymentReference').value;
+        }
+
+        // Initialize
+        showStep(1);
+    </script>
+    
+    <script>
+const dateInput = document.getElementById('paymentDate');
+const formattedDisplay = document.getElementById('formattedDate');
+
+dateInput.addEventListener('change', function () {
+  if (!this.value) return;
+  const [year, month, day] = this.value.split('-');
+  formattedDisplay.textContent = `Selected Date: ${day}/${month}/${year}`;
+});
+</script>
+</body>
+</html>

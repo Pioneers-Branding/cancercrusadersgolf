@@ -1,0 +1,13 @@
+# Large media / video files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wmv
+*.flv
+*.zip
+*.tar.gz
+
+# System files
+.DS_Store
+Thumbs.db
